@@ -18,9 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "downlevelIteration": true,
+    "importHelpers": true
   },
   "include": [
     "src"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }
