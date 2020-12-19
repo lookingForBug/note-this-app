@@ -1,0 +1,6 @@
+{
+  "extends": ["stylelint-prettier/recommended"],
+  "rules": {
+    "declaration-block-no-duplicate-properties": true
+  }
+}
