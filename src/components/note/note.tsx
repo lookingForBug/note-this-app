@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -22,7 +22,7 @@ type Props = {
   color?: string;
 };
 
-export const Note: FC<Props> = ({ title, text, category, createdAt, color = '#fff' }) => {
+export function Note({ title, text, category, createdAt, color = '#fff' }: Props): ReactElement {
   const datetime = dayjs(createdAt).fromNow();
 
   return (
@@ -35,4 +35,4 @@ export const Note: FC<Props> = ({ title, text, category, createdAt, color = '#ff
       </div>
     </div>
   );
-};
+}
