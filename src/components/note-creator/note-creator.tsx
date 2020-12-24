@@ -2,7 +2,10 @@ import React, { ReactElement, useRef } from 'react';
 
 import { Modal } from '@components/modal';
 import { ModalHandle } from '@components/modal/modal';
+import { actions } from '@services/note';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { v4 } from 'uuid';
 
 type NoteCreatorFormValues = {
   title: string;
@@ -13,15 +16,24 @@ export function NoteCreator(): ReactElement {
   const modal = useRef<ModalHandle>(null);
   const { register, handleSubmit } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit: SubmitHandler<NoteCreatorFormValues> = (data) => {
-    console.log(data);
+    const note = {
+      ...data,
+      id: v4(),
+      createdAt: Date.now(),
+    };
+
+    dispatch(actions.createNote(note));
+    modal.current?.close();
   };
 
   return (
     <div>
       <button
         onClick={() => {
-          modal.current && modal.current.open();
+          modal.current?.open();
         }}
       >
         Create
