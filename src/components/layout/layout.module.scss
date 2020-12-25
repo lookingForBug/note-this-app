@@ -1,5 +1,38 @@
-.content {
+@import 'src/styles/variables';
+
+.content-centerer {
   max-width: 1040px;
-  padding: 0 20px;
   margin: 0 auto;
+}
+
+.content {
+  padding: 0 20px;
+  min-height: calc(100vh - #{$header-height-desktop} - #{$footer-height-desktop});
+}
+
+.header {
+  height: $header-height-desktop;
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(to right, #4b6cb7, #182848);
+  font-size: 3.5rem;
+  color: white;
+}
+
+.title {
+  margin: 0;
+  font-size: 3.5rem;
+}
+
+.footer {
+  height: $footer-height-desktop;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.footer-text {
+  padding-top: 15px;
+  display: block;
+  border-top: 1px solid #182848;
 }

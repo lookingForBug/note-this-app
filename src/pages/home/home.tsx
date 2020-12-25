@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { Layout } from '@components/layout';
-import { NoteCreator } from '@components/note-creator';
+import { NoteCreatorModal } from '@components/note-creator-modal';
 import { Notes } from '@components/notes';
 import { useSelector } from '@services/utils/useSelector';
 
@@ -11,7 +11,7 @@ export function Home(): ReactElement {
   return (
     <Layout>
       <h1>Notes This!</h1>
-      <NoteCreator />
+      <NoteCreatorModal />
       <Notes notes={notes} />
     </Layout>
   );

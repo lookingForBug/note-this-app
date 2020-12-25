@@ -23,7 +23,7 @@ type UpdateNoteAction = {
 
 type DeleteNoteAction = {
   type: typeof DELETE_NOTE;
-  payload: NoteType;
+  payload: string;
 };
 
 type NoteActionTypes = CreateNoteAction | UpdateNoteAction | DeleteNoteAction;
@@ -44,10 +44,10 @@ function updateNote(note: NoteType): UpdateNoteAction {
   };
 }
 
-function deleteNote(note: NoteType): DeleteNoteAction {
+function deleteNote(id: string): DeleteNoteAction {
   return {
     type: DELETE_NOTE,
-    payload: note,
+    payload: id,
   };
 }
 
@@ -62,9 +62,9 @@ export default function reducer(state = initialState, action: NoteActionTypes): 
     case CREATE_NOTE:
       return [...state, action.payload];
     case UPDATE_NOTE:
-      return state.map((item) => (item.id === action.payload.id ? action.payload : item));
+      return state.map((item) => (item.id === action.payload.id ? { ...item, ...action.payload } : item));
     case DELETE_NOTE:
-      return state.filter((note) => note.id !== action.payload.id);
+      return state.filter((note) => note.id !== action.payload);
     default:
       return state;
   }

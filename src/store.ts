@@ -13,13 +13,17 @@ const rootReducer = combineReducers({
   notes: notesReducer,
 });
 
-const persistedState = loadStateFromLocalStorage();
-export const store = createStore(rootReducer, persistedState, composeWithDevTools());
+export function configureStore() {
+  const persistedState = loadStateFromLocalStorage();
+  const store = createStore(rootReducer, persistedState, composeWithDevTools());
 
-store.subscribe(
-  throttle(() => {
-    saveStateToLocalStorage({
-      notes: store.getState().notes,
-    });
-  }, 1000),
-);
+  store.subscribe(
+    throttle(() => {
+      saveStateToLocalStorage({
+        notes: store.getState().notes,
+      });
+    }, 1000),
+  );
+
+  return store;
+}

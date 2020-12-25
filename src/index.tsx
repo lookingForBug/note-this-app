@@ -7,7 +7,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'normalize.css';
 import './styles/common.scss';
 
-import { store } from './store';
+import { configureStore } from './store';
+
+const store = configureStore();
 
 const HomePage = React.lazy(() => import('@pages/home'));
 

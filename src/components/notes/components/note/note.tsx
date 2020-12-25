@@ -1,37 +1,34 @@
 import React, { ReactElement } from 'react';
 
+import { NoteUpdaterModal } from '@components/note-updater-modal';
+import { actions, NoteType } from '@services/note';
 import classNames from 'classnames/bind';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { useDispatch } from 'react-redux';
 
 import styles from './note.module.scss';
 
 const cx = classNames.bind(styles);
 dayjs.extend(relativeTime);
 
-type CategoryType = {
-  id: string;
-  alias: string;
-};
-
-type Props = {
-  title?: string;
-  text: string;
-  category?: CategoryType;
-  createdAt: number;
-  color?: string;
-};
-
-export function Note({ title, text, category, createdAt, color = '#fff' }: Props): ReactElement {
+export function Note({ title, text, createdAt, id }: NoteType): ReactElement {
   const datetime = dayjs(createdAt).fromNow();
+  const dispatch = useDispatch();
+  const deleteHandler = () => {
+    dispatch(actions.deleteNote(id));
+  };
 
   return (
-    <div style={{ backgroundColor: color }} className={cx('note')}>
+    <div className={cx('note')}>
       {title && <h3>{title}</h3>}
       <span>{text}</span>
       <div>
-        {category && <span>{category.alias}</span>}
         <span>{datetime}</span>
+        <div>
+          <NoteUpdaterModal id={id} editableData={{ title, text }} />
+          <button onClick={deleteHandler}>Delete</button>
+        </div>
       </div>
     </div>
   );
