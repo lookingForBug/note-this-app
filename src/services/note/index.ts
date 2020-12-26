@@ -6,7 +6,8 @@ export type NoteType = {
   id: string;
   title: string;
   text: string;
-  createdAt: number;
+  timestamp: number;
+  isUpdated: boolean;
 };
 
 export type NotesType = NoteType[];

@@ -4,7 +4,7 @@ import { Modal } from '@components/modal';
 import { ModalHandle } from '@components/modal/modal';
 import { NoteForm } from '@components/note-form/intex';
 import { NoteCreatorFormValues } from '@components/note-form/note-form';
-import { actions } from '@services/note';
+import { actions, NoteType } from '@services/note';
 import { SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { v4 } from 'uuid';
@@ -15,10 +15,11 @@ export function NoteCreatorModal(): ReactElement {
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<NoteCreatorFormValues> = (data) => {
-    const note = {
+    const note: NoteType = {
       ...data,
       id: v4(),
-      createdAt: Date.now(),
+      timestamp: Date.now(),
+      isUpdated: false,
     };
 
     dispatch(actions.createNote(note));

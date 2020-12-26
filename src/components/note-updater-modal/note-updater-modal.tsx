@@ -7,7 +7,7 @@ import { actions, NoteType } from '@services/note';
 import { SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-type EditableDataType = Omit<NoteType, 'createdAt' | 'id'>;
+type EditableDataType = Pick<NoteType, 'title' | 'text'>;
 
 type Props = {
   id: string;
@@ -20,10 +20,11 @@ export function NoteUpdaterModal({ editableData, id }: Props): ReactElement {
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<NoteCreatorFormValues> = (data) => {
-    const note = {
+    const note: NoteType = {
       ...data,
       id,
-      createdAt: Date.now(),
+      timestamp: Date.now(),
+      isUpdated: true,
     };
 
     dispatch(actions.updateNote(note));

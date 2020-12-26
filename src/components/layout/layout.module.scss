@@ -1,28 +1,26 @@
 @import 'src/styles/variables';
 
-.content-centerer {
-  max-width: 1040px;
-  margin: 0 auto;
-}
-
 .content {
   padding: 0 20px;
-  min-height: calc(100vh - #{$header-height-desktop} - #{$footer-height-desktop});
+  min-height: 100vh;
+  flex: 1;
 }
 
 .header {
-  height: $header-height-desktop;
   padding: 20px;
   display: flex;
-  align-items: flex-end;
-  background: linear-gradient(to right, #4b6cb7, #182848);
-  font-size: 3.5rem;
-  color: white;
+  max-width: 300px;
+  font-size: 1.5rem;
+  position: sticky;
+  height: 100vh;
+  top: 0;
 }
 
 .title {
   margin: 0;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
+  font-family: 'RobotoCondensed';
+  font-weight: normal;
 }
 
 .footer {
@@ -35,4 +33,9 @@
   padding-top: 15px;
   display: block;
   border-top: 1px solid #182848;
+}
+
+.main-content {
+  display: flex;
+  justify-content: flex-start;
 }

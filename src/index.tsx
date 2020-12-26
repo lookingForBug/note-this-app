@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 
+import { Layout } from '@components/layout';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -17,11 +18,13 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Suspense fallback={<span>Loading...</span>}>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-          </Switch>
-        </Suspense>
+        <Layout>
+          <Suspense fallback={<span>Loading...</span>}>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+            </Switch>
+          </Suspense>
+        </Layout>
       </Router>
     </Provider>
   </React.StrictMode>,

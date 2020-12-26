@@ -12,8 +12,8 @@ import styles from './note.module.scss';
 const cx = classNames.bind(styles);
 dayjs.extend(relativeTime);
 
-export function Note({ title, text, createdAt, id }: NoteType): ReactElement {
-  const datetime = dayjs(createdAt).fromNow();
+export function Note({ id, title, text, timestamp, isUpdated }: NoteType): ReactElement {
+  const datetime = dayjs(timestamp).fromNow();
   const dispatch = useDispatch();
   const deleteHandler = () => {
     dispatch(actions.deleteNote(id));
@@ -24,7 +24,10 @@ export function Note({ title, text, createdAt, id }: NoteType): ReactElement {
       {title && <h3>{title}</h3>}
       <span>{text}</span>
       <div>
-        <span>{datetime}</span>
+        <span>
+          {isUpdated ? 'Updated ' : 'Created '}
+          {datetime}
+        </span>
         <div>
           <NoteUpdaterModal id={id} editableData={{ title, text }} />
           <button onClick={deleteHandler}>Delete</button>
